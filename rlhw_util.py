@@ -64,7 +64,7 @@ class Generator(object):
 	def __next__(self):
 		return self()
 	
-	def __call__(self, horizon=None, render=False):
+	def __call__(self, horizon=None, render=False, renderClose=True):
 		
 		states = []
 		actions = []
@@ -89,7 +89,7 @@ class Generator(object):
 		
 		if self.drop_last_state:
 			states.pop()
-		
+		        
 		states = torch.stack(states)
 		actions = torch.stack(actions)
 		rewards = torch.cat(rewards)
@@ -132,7 +132,8 @@ def solve(A, b, out=None, bias=True):
 	if bias:
 		A = torch.cat([A, torch.ones(*(A.size()[:-1] + (1,))).type_as(A)], -1)
 	
-	x, _ = torch.gels(b, A)
+	#x, _ = torch.gels(b, A) # depricated
+	x, _ = torch.lstsq(b, A)
 	
 	if out is None:
 		out = nn.Linear(A.size(-1) - 1, b.size(-1), bias=bias).to(A.device)
