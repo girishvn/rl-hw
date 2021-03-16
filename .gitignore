@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# IPython notebook
+.ipynb_checkpoints
+
+# Folders to exclude
+data/
+outputImgs/
+
+# Mac specific files
+.DS_Store
