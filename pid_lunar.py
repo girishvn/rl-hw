@@ -87,7 +87,7 @@ def optimize(params, current_score, env, step):
 
     # add gaussian noise (less noise as n_steps increases)
     # Anand testing: screw less noise
-    test_params = params + np.random.normal(0, 20.0, size=params.shape)
+    test_params = params + np.random.normal(0, 20, size=params.shape)
 
     # test params over 5 trial avg
     scores = []
@@ -109,12 +109,17 @@ def main():
     env._max_episode_steps = 300
 
     # Seed RNGs
-    np.random.seed(0)
-    env.seed(0)
+    np.random.seed(1)
+    env.seed(1)
 
+    # params = np.array([ 118.30836503, -82.19406683, -131.3050819, 253.21697975]) with avg score: 117.95191132310183
+    # params = np.array([64.84815221, -42.99069277, -95.57514311, 95.02238141]) with avg score 175.7929774562085
+    # params = np.array([65.18975995, -50.41044501, -146.6427114, 112.30143372]) with avg score 154.23747254900877
+    # [SEEDS = 1] params = np.array([ 25.02854049, -18.43175368, -34.46422641, 30.91876206]) with avg score 197.07379373263032
+
+    #params = np.array([ 0, 0, 0, 0])
+    params = np.array([ 25.02854049, -18.43175368, -34.46422641, 30.91876206])
     # Random Hill Climb over params
-    params = np.array([ 118.30836503, -82.19406683, -131.3050819, 253.21697975])
-    # skipping hill climb using the last parameters
     # score = -300  # bad starting score
     # for steps in range(101):
     #     params, score = optimize(params, score, env, steps + 1)
