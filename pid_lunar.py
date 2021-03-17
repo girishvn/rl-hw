@@ -86,7 +86,8 @@ def optimize(params, current_score, env, step):
     """ runs a step of randomized hill climbing """
 
     # add gaussian noise (less noise as n_steps increases)
-    test_params = params + np.random.normal(0, 20.0 / step, size=params.shape)
+    # Anand testing: screw less noise
+    test_params = params + np.random.normal(0, 20.0, size=params.shape)
 
     # test params over 5 trial avg
     scores = []
@@ -112,12 +113,13 @@ def main():
     env.seed(0)
 
     # Random Hill Climb over params
-    params = np.array([0, 0, 0, 0])
-    score = -300  # bad starting score
-    for steps in range(101):
-        params, score = optimize(params, score, env, steps + 1)
-        if steps % 10 == 0:
-            print("Step:", steps, "Score:", score, "Params:", params)
+    params = np.array([ 118.30836503, -82.19406683, -131.3050819, 253.21697975])
+    # skipping hill climb using the last parameters
+    # score = -300  # bad starting score
+    # for steps in range(101):
+    #     params, score = optimize(params, score, env, steps + 1)
+    #     if steps % 10 == 0:
+    #         print("Step:", steps, "Score:", score, "Params:", params)
 
     # Get data for final run
     scores = []
